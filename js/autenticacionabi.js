@@ -1,49 +1,20 @@
 var AutenticacionABI = [
 	{
-		"constant": true,
+		"constant": false,
 		"inputs": [
 			{
-				"name": "",
-				"type": "uint256"
+				"name": "_usuario",
+				"type": "string"
+			},
+			{
+				"name": "_contrasena",
+				"type": "string"
 			}
 		],
-		"name": "usuarios",
-		"outputs": [
-			{
-				"name": "nombre",
-				"type": "string"
-			},
-			{
-				"name": "apellido",
-				"type": "string"
-			},
-			{
-				"name": "identificacion",
-				"type": "string"
-			},
-			{
-				"name": "email",
-				"type": "string"
-			},
-			{
-				"name": "usuario",
-				"type": "string"
-			},
-			{
-				"name": "contrasena",
-				"type": "uint256"
-			},
-			{
-				"name": "edad",
-				"type": "uint256"
-			},
-			{
-				"name": "clave",
-				"type": "address"
-			}
-		],
+		"name": "iniciarSesion",
+		"outputs": [],
 		"payable": false,
-		"stateMutability": "view",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -79,47 +50,6 @@ var AutenticacionABI = [
 			}
 		],
 		"name": "registrarse",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "a",
-				"type": "string"
-			},
-			{
-				"name": "b",
-				"type": "string"
-			}
-		],
-		"name": "compararStrings",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_usuario",
-				"type": "string"
-			},
-			{
-				"name": "_contrasena",
-				"type": "string"
-			}
-		],
-		"name": "iniciarSesion",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -166,5 +96,52 @@ var AutenticacionABI = [
 		],
 		"name": "NewUser",
 		"type": "event"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "usuarios",
+		"outputs": [
+			{
+				"name": "nombre",
+				"type": "string"
+			},
+			{
+				"name": "apellido",
+				"type": "string"
+			},
+			{
+				"name": "identificacion",
+				"type": "string"
+			},
+			{
+				"name": "email",
+				"type": "string"
+			},
+			{
+				"name": "usuario",
+				"type": "string"
+			},
+			{
+				"name": "contrasena",
+				"type": "uint256"
+			},
+			{
+				"name": "edad",
+				"type": "uint256"
+			},
+			{
+				"name": "clave",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
 	}
 ]
