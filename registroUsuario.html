@@ -37,9 +37,8 @@
     		var Autenticacion;
     		var userAccount;
     		function start(){
-    			var autenticacionAdd = '0xB8e5B4Ac0349938be11AACcB1b5FC07D296a50EB';
+    			var autenticacionAdd = "0xa39f98c47241edacb81378ae1d0d861781d1b152";
     			var Autenticacion = new web3js.eth.Contract(AutenticacionABI, autenticacionAdd);
-                
     	 var accountInterval = setInterval(function() {
           // Comprobar si la cuenta ha sido cambiada
           if (web3.eth.accounts[0] !== userAccount) {
