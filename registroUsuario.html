@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Registro de Usuario</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="eCommerceAssets/styles/eCommerceStyle.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600|Open+Sans" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+        <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+        <script src="js/autenticacionabi.js"></script>
+        <script>var _adobewebfontsappname_ = "dreamweaver"</script><script src="http://use.edgefonts.net/montserrat:n4:default;source-sans-pro:n2:default.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="css/estilo.css">
+        <link rel="stylesheet" href="css/font-awesome.css">
+    </head>
+
+    <body>
+    	<script>
+	window.addEventListener('load', function() {
+        // Aquí se comprueba si Web3.js ha sido inyecto por el navegador (Mist/MetaMask)
+        if (typeof web3 !== 'undefined') {
+          // Usar el proveedor Mist/MetaMask
+          web3js = new Web3(web3.currentProvider);
+        } else {
+          // Aquí se podría poner algo para avisar al usuario de que no tiene Metamask o Mist instalado
+          alert("Install Metamask");
+          web3js = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+          // Probablemente mostrarle un mensake pidiéndole que se lo instale
+        }
+        // Ahora ya puedes acceder libremente a tu DApp y usar Web3:
+        start();
+      })
+    		var Autenticacion;
+    		var userAccount;
+    		function start(){
+    			var autenticacionAdd = "0x3cad92607D2fcb994F021A8535194007295480d2"
+    			Autenticacion = new web3js.eth.Contract(AutenticacionABI, autenticacionAdd);
+    	 var accountInterval = setInterval(function() {
+          // Comprobar si la cuenta ha sido cambiada
+          	alert(web3js.eth.accounts[0]);
+          if (web3.eth.accounts[0] !== userAccount) {
+            userAccount = web3.eth.accounts[0];
+            
+            // Llamar la función que va a updatear la UI with de la nueva cuenta
+            
+          }
+        }, 100);
+    		}
+    		function registrar (nombre, apellido, identificacion, edad, email, usuario, contraseña, genero){
+				$("#txStatus").text("Registrando usuario");
+    			return Autenticacion.methods.registrarse(nombre,apellido,identificacion,email,usuario,contraseña,edad)
+        .send({ from: userAccount })
+        .on("receipt", function(receipt) {
+          $("#txStatus").text("Successfully created " + usuario + "!");
+          // La transacción ha sido aceptada por la blockchain, así que vamos a redibujar la UI
+          //getZombiesByOwner(userAccount).then(displayZombies);
+          alert("usuario creado");
+          location.replace("inicioSesion.html");
+        })
+        .on("error", function(error) {
+          // Se avisa al usuario de que su transacción no ha sido completada con éxito
+          $("#txStatus").text(error);
+          alert(error);
+        });
+
+    		}
+
+    		function registroBtn(){
+    			var xhttp = new XMLHttpRequest();
+				  xhttp.onreadystatechange = function() {
+				    if (this.readyState == 4 && this.status == 200) {
+				      document.getElementById("demo").innerHTML =
+				      this.responseText;
+				    }
+				  };
+				  xhttp.open("POST", "inicioSesion.html", true);
+				  xhttp.send();
+    			var nombre = document.getElementById("name1").value;
+    			var apellido = document.getElementById("lastname1").value;
+    			var identificacion = document.getElementById("ced").value;
+    			var fecha= document.getElementById("fecha").value;
+    			var email = document.getElementById("email").value;
+    			var user = document.getElementById("user").value;
+    			var contrasena = document.getElementById("contraseña").value;
+    			edad= calcular_edad(fecha);
+    			registrar(nombre, apellido, identificacion, edad, email, user, contrasena,"masculino");
+
+    		}
+    		function calcular_edad(fecha){
+
+			    //calculo la fecha de hoy
+			    hoy=new Date()
+
+			    //alert(hoy)
+
+			    //calculo la fecha que recibo
+			    //La descompongo en un array
+			    var array_fecha = fecha.split("-")
+			    //si el array no tiene tres partes, la fecha es incorrecta
+			    if (array_fecha.length!=3)
+			       return false
+
+			    //compruebo que los ano, mes, dia son correctos
+			    var ano
+			    ano = parseInt(array_fecha[0]);
+			    if (isNaN(ano))
+			       return false
+			   
+			    var mes
+			    mes = parseInt(array_fecha[1]);
+			    if (isNaN(mes))
+			       return false
+
+			    var dia
+			    dia = parseInt(array_fecha[2]);
+			    if (isNaN(dia))
+			       return false
+
+
+			    //si el año de la fecha que recibo solo tiene 2 cifras hay que cambiarlo a 4
+			    if (ano<=99)
+			       ano +=1900
+
+			    //resto los años de las dos fechas
+			    edad=2020- ano - 1; //-1 porque no se si ha cumplido años ya este año
+			    //si resto los meses y me da menor que 0 entonces no ha cumplido años. Si da mayor si ha cumplido
+			    if (hoy.getMonth() + 1 - mes < 0) //+ 1 porque los meses empiezan en 0
+			       return edad
+			    if (hoy.getMonth() + 1 - mes > 0)
+			       return edad+1
+
+			    //entonces es que eran iguales. miro los dias
+			    //si resto los dias y me da menor que 0 entonces no ha cumplido años. Si da mayor o igual si ha cumplido
+			    if (hoy.getUTCDate() - dia >= 0)
+			       return edad + 1
+
+			    return edad
+			}
+
+    	</script>>
+        <section class="form_wrap">
+
+            <section class="cantact_info">
+                <section class="info_title">
+                    <h2>_</h2>
+                </section>
+            </section>
+
+            <form method="get" class="form_contact">
+                <h2>Formulario de registro para votación</h2>
+                <div class="user_info">
+                    <label for="names">Primer nombre*</label>
+                    <input type="text" id="name1" name="name1" required>
+
+                    <label for="names">Segundo nombre</label>
+                    <input type="text" id="name2" name="name2">
+
+                    <label for="names">Primer apellido*</label>
+                    <input type="text" id="lastname1" name="lastname1" required>
+
+                    <label for="names">Segundo apellido</label>
+                    <input type="text" id="lastname2" name="lastname2" >
+
+                    <div>
+                        <table>
+                            <tr>
+                                <td style="width:200px;" border="1">
+                                    <label for="names">Tipo de Identificacion*</label> <br> <br>
+                                    <select name="tipoID" style="width:150px;">
+                                        <option value="CC" selected>CC</option> 
+                                        <option value="TI">TI</option>
+                                        <option value="CE">CE</option>
+                                        <option value="PA">PA</option>
+                                    </select>
+                                </td>
+                                <td align="left" style="width:250px";>
+                                    <br>
+                                    <label for="ced">Número de identificación*</label>
+                                    <input type="text" id="ced" name="ced" required>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    
+
+                    <label for="fecha">Fecha de nacimiento*</label>
+                    <input type="date" id="fecha" name="date" step="1" mcumpleaniosin="1800-01-01" max="2002-12-24" value="1990-04-09">
+
+                    <label for="email">E-mail*</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="user">Usuario*</label>
+                    <input type="text" id="user" name="user" required>
+
+                    <label for="contraseña">Contraseña*</label>
+                    <input type="password" id="contraseña" name="pass" required>
+
+                    <label for="genero">Género</label>
+                    <div class="radio">
+                        <input type="radio" id="fem" name="genero" value="fem">
+                        <label for ="fem" name="fem">Femenino</label>
+
+                        <input type="radio"  id="mas" name="genero" value="mas">
+                        <label for ="mas" name="mas">Masculino</label>
+
+                        <input type="radio"  id="otro" name ="genero" value="otro">
+                        <label for ="otro" name="otro">Otro</label>
+                    </div>
+
+                    <center>
+                        <input type="button" name="sesion" value="Registrarse" id="btnSend" onclick="registroBtn()">
+                    </center>
+
+                </div>
+            </form>
+
+        </section>
+
+        <script src="js/VentanasMini.js"></script>
+        <script src="js/popup.js"></script>
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap-4.4.1.js"></script>
+
+    </body>
+
+</html>
