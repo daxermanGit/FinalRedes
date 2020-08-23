@@ -1,1 +1,1 @@
-<? php require_once("registroUsuario.html") ?>
+<?php require_once("registroUsuario.html") ?>
