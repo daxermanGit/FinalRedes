@@ -53,17 +53,19 @@
             }
              
              function cantidadVotos(opcion){
-                return Votacion.methods.contarVotos(opcion).call()
+                return Votacion.methods.contarVotos(opcion).call();
              }
-
             function votar(opcion){
                 $("#txStatus").text("Votando");
                 return Votacion.methods.votar(opcion)
         .send({ from: userAccount })
         .on("receipt", function(receipt) {
-              $("#txStatus").text("Voto registrado!");cantidadVotos(opcion).then(function(result){         
-              alert("voto registrado, ahora esta opcion tiene " result " votos");
-            });
+          $("#txStatus").text("Voto registrado!");    
+
+
+            cantidadVotos(opcion)
+            .then(function(result){alert("voto registrado, ahora esta opcion tiene " + result + " votos");});
+          
          // location.replace("votacion.html");
         })
         .on("error", function(error) {
@@ -74,7 +76,7 @@
 
             }
 
-            function VotarBtn(){
+        function VotarBtn(){
                 var xhttp = new XMLHttpRequest();
                   xhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
@@ -103,7 +105,7 @@
                 </section>
             </section>
 
-            <form method="get" class="form_contact" name="votos">
+            <form method="POST" class="form_contact" name="votos">
                 <h2>Votación</h2>
                 <div>
                     <label for="propuesta">Propuesta</label>
