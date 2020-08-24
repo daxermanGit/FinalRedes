@@ -52,13 +52,17 @@
         }, 100);
             }
              
+             function cantidadVotos(opcion){
+                return Votacion.methods.contarVotos(opcion).call();
+             }
+             
             function votar(opcion){
                 $("#txStatus").text("Votando");
                 return Votacion.methods.votar(opcion)
         .send({ from: userAccount })
         .on("receipt", function(receipt) {
           $("#txStatus").text("Voto registrado!");          
-          alert("voto registrado, ahora esta opcion tiene "+Votacion.methods.contarVotos(opcion).call()+ " votos");
+          alert("voto registrado, ahora esta opcion tiene "+cantidadVotos(opcion)+ " votos");
          // location.replace("votacion.html");
         })
         .on("error", function(error) {
