@@ -10,13 +10,85 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600|Open+Sans" rel="stylesheet"> 
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
         <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+        <script src="js/votacionabi.js"></script>
         <script>var _adobewebfontsappname_ = "dreamweaver"</script><script src="http://use.edgefonts.net/montserrat:n4:default;source-sans-pro:n2:default.js" type="text/javascript"></script>
         <link rel="stylesheet" href="css/estilo.css">
         <link rel="stylesheet" href="css/font-awesome.css">
     </head>
 
     <body>
+<script>
+    window.addEventListener('load', function() {
+        // Aquí se comprueba si Web3.js ha sido inyecto por el navegador (Mist/MetaMask)
+        if (typeof web3 !== 'undefined') {
+        alert("MetaMask detectado");
+          // Usar el proveedor Mist/MetaMask
+          web3js = new Web3(web3.currentProvider);
+        } else {
+          // Aquí se podría poner algo para avisar al usuario de que no tiene Metamask o Mist instalado
+          alert("Install Metamask");
+          web3js = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+          // Probablemente mostrarle un mensake pidiéndole que se lo instale
+        }
+        // Ahora ya puedes acceder libremente a tu DApp y usar Web3:
+        start();
+      })
+            var Votacion;
+            var userAccount;
+            var inicioEvento;
+            function start(){
+                var votacionAdd = '0x39C7ba7616639fEA4dc828B5e36D31d829e673cb';
+                Votacion = new web3js.eth.Contract(VotacionABI, votacionAdd);
+                
+         var accountInterval = setInterval(function() {
+          // Comprobar si la cuenta ha sido cambiada
+          if (web3.eth.accounts[0] !== userAccount) {
+            userAccount = web3.eth.accounts[0];
+            
+            // Llamar la función que va a updatear la UI with de la nueva cuenta
+            
+          }
+        }, 100);
+            }
+            function votar(opcion){
+                $("#txStatus").text("Votando");
+                return Votacion.methods.votar(opcion)
+        .send({ from: userAccount })
+        .on("receipt", function(receipt) {
+          $("#txStatus").text("Voto registrado!");          
+          alert("voto registrado, ahora esta opcion tiene "+Votacion.methods.contarVotos(opcion)+ " votos");
+         // location.replace("votacion.html");
+        })
+        .on("error", function(error) {
+          // Se avisa al usuario de que su transacción no ha sido completada con éxito
+          $("#txStatus").text(error);
+          alert(error);
+        });
 
+            }
+
+            function VotarBtn(){
+                var xhttp = new XMLHttpRequest();
+                  xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                      document.getElementById("demo").innerHTML =
+                      this.responseText;
+                    }
+                  };
+                  xhttp.open("POST", "inicioSesion.html", true);
+                  xhttp.send();
+                  var i 
+                for (i=0;i<document.form_contact.voto.length;i++){ 
+                    if (document.form_contact.voto.checked) 
+                        break; 
+                    } 
+                votar(i);
+
+            }
+            
+
+        </script>>
         <section class="form_wrap">
 
             <section class="select_info">
@@ -42,7 +114,7 @@
                         <label for ="abs" name="abs">Abstenerse</label>
                     </div>
                         <center>
-                        <input type="submit" name="sesion" value="Enviar" id="btnSend">
+                        <input type="button" name="sesion" value="Enviar" id="btnSend" onclick="VotarBtn()">
                         </center>
                 </div>
                
