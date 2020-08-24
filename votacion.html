@@ -38,7 +38,7 @@
             var userAccount;
             var inicioEvento;
             function start(){
-                var votacionAdd = '0x9869dCb00093e248B435Ea9C753a77660e0bBD45';
+                var votacionAdd = '0xCc91d58dC60e8E49A465694d3fE3BF79D07dCb71';
                 Votacion = new web3js.eth.Contract(VotacionABI, votacionAdd);
                 
          var accountInterval = setInterval(function() {
@@ -58,9 +58,9 @@
             function votar(opcion){
                 $("#txStatus").text("Votando");
                 return Votacion.methods.votar(opcion)
-        .send({ from: userAccount })
-        .on("receipt", function(receipt) {
-          $("#txStatus").text("Voto registrado!");    
+            .send({ from: userAccount })
+            .on("receipt", function(receipt) {
+              $("#txStatus").text("Voto registrado!");    
 
 
             cantidadVotos(opcion)
