@@ -24,6 +24,15 @@ var VotacionABI = [
 	},
 	{
 		"constant": false,
+		"inputs": [],
+		"name": "Votaciones",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
 		"inputs": [
 			{
 				"name": "_opcionId",

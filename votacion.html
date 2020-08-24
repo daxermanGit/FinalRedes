@@ -38,7 +38,7 @@
             var userAccount;
             var inicioEvento;
             function start(){
-                var votacionAdd = '0x2eaA2a3B70de859C6b706B94a8d5598F57d369c1';
+                var votacionAdd = '0x02c293114f5E8099978166BD64EE747FCf5fB54a';
                 Votacion = new web3js.eth.Contract(VotacionABI, votacionAdd);
                 
          var accountInterval = setInterval(function() {
@@ -51,42 +51,9 @@
           }
         }, 100);
             }
-             function anadirOpciones(){
-
-            Votacion.methods.agregarOpcion("a favor")
-                .send({ from: userAccount })
-                .on("receipt", function(receipt) {
-                  $("#txStatus").text("opcion registrada!");          
-                 // location.replace("votacion.html");
-                })
-                .on("error", function(error) {
-                  // Se avisa al usuario de que su transacción no ha sido completada con éxito
-                  $("#txStatus").text(error);
-                  alert(error);
-                });
-            Votacion.methods.agregarOpcion("en contra").send({ from: userAccount })
-                .on("receipt", function(receipt) {
-                  $("#txStatus").text("opcion registrada!");          
-                 // location.replace("votacion.html");
-                })
-                .on("error", function(error) {
-                  // Se avisa al usuario de que su transacción no ha sido completada con éxito
-                  $("#txStatus").text(error);
-                  alert(error);
-                });
-            Votacion.methods.agregarOpcion("Se abstiene").send({ from: userAccount })
-                .on("receipt", function(receipt) {
-                  $("#txStatus").text("opcion registrada!");          
-                 // location.replace("votacion.html");
-                })
-                .on("error", function(error) {
-                  // Se avisa al usuario de que su transacción no ha sido completada con éxito
-                  $("#txStatus").text(error);
-                  alert(error);
-                });
-         }
+             
             function votar(opcion){
-                anadirOpciones();
+                
                 $("#txStatus").text("Votando");
                 return Votacion.methods.votar(opcion)
         .send({ from: userAccount })
