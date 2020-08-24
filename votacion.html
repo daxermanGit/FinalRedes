@@ -53,7 +53,7 @@
             }
              
             function votar(opcion){
-                
+                alert(opcion);
                 $("#txStatus").text("Votando");
                 return Votacion.methods.votar(opcion)
         .send({ from: userAccount })
