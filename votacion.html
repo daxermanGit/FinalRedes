@@ -79,8 +79,8 @@
                   xhttp.open("POST", "inicioSesion.html", true);
                   xhttp.send();
                   var i 
-                for (i=0;i<form_contact.voto.length;i++){ 
-                    if (form_contact.voto.checked) 
+                for (i=0;i<document.votos.voto.length;i++){ 
+                    if (document.votos.voto.checked) 
                         break; 
                     } 
                 votar(i);
@@ -97,7 +97,7 @@
                 </section>
             </section>
 
-            <form method="get" class="form_contact">
+            <form method="get" class="form_contact" name="votos">
                 <h2>Votación</h2>
                 <div>
                     <label for="propuesta">Propuesta</label>
