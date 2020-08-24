@@ -50,8 +50,8 @@
             
           }
         }, 100);
-
-         function anadirOpciones(){
+            }
+             function anadirOpciones(){
 
             Votacion.methods.agregarOpcion("a favor")
                 .send({ from: userAccount })
@@ -85,7 +85,6 @@
                   alert(error);
                 });
          }
-            
             function votar(opcion){
                 anadirOpciones();
                 $("#txStatus").text("Votando");
