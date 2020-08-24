@@ -59,7 +59,7 @@
         .send({ from: userAccount })
         .on("receipt", function(receipt) {
           $("#txStatus").text("Voto registrado!");          
-          alert("voto registrado, ahora esta opcion tiene "+Votacion.methods.contarVotos(opcion).send({ from: userAccount })+ " votos");
+          alert("voto registrado, ahora esta opcion tiene "+Votacion.methods.contarVotos(opcion).call({ from: userAccount })+ " votos");
          // location.replace("votacion.html");
         })
         .on("error", function(error) {
