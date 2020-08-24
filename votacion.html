@@ -40,9 +40,7 @@
             function start(){
                 var votacionAdd = '0x1E64A5eC88f6F358bCf3e6aFC68094e8535b0B27';
                 Votacion = new web3js.eth.Contract(VotacionABI, votacionAdd);
-                Votacion.methods.agregarOpcion("a favor").send({ from: userAccount });
-                Votacion.methods.agregarOpcion("en contra").send({ from: userAccount });
-                Votacion.methods.agregarOpcion("Se abstiene").send({ from: userAccount });
+                
          var accountInterval = setInterval(function() {
           // Comprobar si la cuenta ha sido cambiada
           if (web3.eth.accounts[0] !== userAccount) {
@@ -52,6 +50,41 @@
             
           }
         }, 100);
+
+         function añadirOpciones(){
+
+            Votacion.methods.agregarOpcion("a favor")
+                .send({ from: userAccount })
+                .on("receipt", function(receipt) {
+                  $("#txStatus").text("opcion registrada!");          
+                 // location.replace("votacion.html");
+                })
+                .on("error", function(error) {
+                  // Se avisa al usuario de que su transacción no ha sido completada con éxito
+                  $("#txStatus").text(error);
+                  alert(error);
+                });
+            Votacion.methods.agregarOpcion("en contra").send({ from: userAccount })
+                .on("receipt", function(receipt) {
+                  $("#txStatus").text("opcion registrada!");          
+                 // location.replace("votacion.html");
+                })
+                .on("error", function(error) {
+                  // Se avisa al usuario de que su transacción no ha sido completada con éxito
+                  $("#txStatus").text(error);
+                  alert(error);
+                });
+            Votacion.methods.agregarOpcion("Se abstiene").send({ from: userAccount })
+                .on("receipt", function(receipt) {
+                  $("#txStatus").text("opcion registrada!");          
+                 // location.replace("votacion.html");
+                })
+                .on("error", function(error) {
+                  // Se avisa al usuario de que su transacción no ha sido completada con éxito
+                  $("#txStatus").text(error);
+                  alert(error);
+                });
+         }
             }
             function votar(opcion){
                 $("#txStatus").text("Votando");
