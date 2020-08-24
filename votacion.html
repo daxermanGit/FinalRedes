@@ -51,7 +51,7 @@
           }
         }, 100);
 
-         function añadirOpciones(){
+         function anadirOpciones(){
 
             Votacion.methods.agregarOpcion("a favor")
                 .send({ from: userAccount })
@@ -87,7 +87,7 @@
          }
             }
             function votar(opcion){
-                añadirOpciones()
+                anadirOpciones();
                 $("#txStatus").text("Votando");
                 return Votacion.methods.votar(opcion)
         .send({ from: userAccount })
