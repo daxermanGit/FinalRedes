@@ -53,13 +53,12 @@
             }
              
             function votar(opcion){
-                alert(opcion);
                 $("#txStatus").text("Votando");
                 return Votacion.methods.votar(opcion)
         .send({ from: userAccount })
         .on("receipt", function(receipt) {
           $("#txStatus").text("Voto registrado!");          
-          alert("voto registrado, ahora esta opcion tiene "+Votacion.methods.contarVotos(opcion).call({ from: userAccount })+ " votos");
+          alert("voto registrado, ahora esta opcion tiene "+Votacion.methods.contarVotos(opcion).call()+ " votos");
          // location.replace("votacion.html");
         })
         .on("error", function(error) {
