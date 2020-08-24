@@ -87,6 +87,7 @@
          }
             }
             function votar(opcion){
+                añadirOpciones()
                 $("#txStatus").text("Votando");
                 return Votacion.methods.votar(opcion)
         .send({ from: userAccount })
